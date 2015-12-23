@@ -49,8 +49,7 @@ class Tama {
         this.lastFeed = currentTime;
         this.write('I am fed.');
 
-        this.mesh.update({width: 2});
-        console.log(`unhealthy: ${this.unhealthy}`);
+        this.mesh.updateQueue({width: 20});
 
     }
 

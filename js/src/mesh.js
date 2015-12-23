@@ -95,13 +95,19 @@ class Strand {
         return this._end;
     }
 
+    updateXCoordinates(newX) {
+        this.start[0] = newX;
+        this.control1[0] = newX;
+        this.control2[0] = newX;
+        this.end[0] = newX;
+    }
 
 
 }
 
 class Mesh {
 
-    constructor(strokeWidth = 1, spacing = 20) {
+    constructor(strokeWidth = 1, spacing = 0) {
         this.queue = [];
         this.strokeWidth = strokeWidth;
         this.spacing = spacing;
@@ -133,21 +139,7 @@ class Mesh {
         this.strands.forEach(function(strand){ strand.draw(context); });
     }
 
-    update(options) {
-        if (options) {
-            const final = 20,
-                  steps = 1000/60;
-
-            for (let i = 0; i < steps; i += 1) {
-                this.queue.push({
-                    width: this.strands.map(function(strand) {
-                            let interpolatedValue = Math.abs(strand.width - final);
-                            return Math.round(interpolatedValue/steps);
-                        })
-                });
-            }
-        }
-
+    update() {
         if (this.queue.length < 1) {
             return;
         }
@@ -155,33 +147,38 @@ class Mesh {
         this.processQueue();
     }
 
+    updateQueue(action) {
+        const attribute = Object.keys(action)[0],
+              final = action[attribute],
+              steps = 1000/60,
+              increment = Math.round(Math.abs(this.strokeWidth - final)/steps);
+
+        for (let i = 0; i < steps; i += 1) {
+            const queueAction = {};
+            queueAction[attribute] = increment;
+            this.queue.push(queueAction);
+        }
+    }
+
     processQueue() {
         const action = this.queue.shift(),
-              self = this;
+              spacing = this.spacing;
 
-        action.width.forEach(function(act, i){
-            const strand = self.strands[i];
-            if (strand === undefined) {
-                return;
-            }
+        this.strokeWidth += action.width;
 
-            strand.width += act;
-            self.strokeWidth = strand.width;
+        const width = this.strokeWidth;
 
-            const newX = (i * ((strand.width) + self.spacing)) + strand.width/2;
-
-            strand.start = [newX, strand.start[1]];
-            strand.control1 = [newX, 0];
-            strand.control2 = [newX, 0];
-            strand.end = [newX, strand.end[1]];
+        this.strands.forEach(function(strand, i){
+            strand.width = width;
+            strand.updateXCoordinates((i * (width + spacing)) + width/2);
         });
 
-        self.numberOfLines = Math.floor(settings.width * settings.pixelDensity/(this.strokeWidth + this.spacing));
+        this.updateMeshSize();
+    }
 
-        self.strands = self.strands.slice(0, self.numberOfLines);
-
-
-
+    updateMeshSize() {
+        this.numberOfLines = Math.floor(settings.width * settings.pixelDensity/(this.strokeWidth + this.spacing));
+        this.strands = this.strands.slice(0, this.numberOfLines);
     }
 
 }
