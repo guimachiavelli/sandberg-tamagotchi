@@ -97,7 +97,6 @@ class Strand {
 
     updateXCoordinates(newX) {
         this.start[0] = newX;
-        this.control1[0] = newX;
         this.control2[0] = newX;
         this.end[0] = newX;
     }
@@ -107,7 +106,7 @@ class Strand {
 
 class Mesh {
 
-    constructor(strokeWidth = 1, spacing = 0) {
+    constructor(strokeWidth = 1, spacing = 10) {
         this.queue = [];
         this.strokeWidth = strokeWidth;
         this.spacing = spacing;
@@ -121,7 +120,7 @@ class Mesh {
         let i = 0;
 
         while (i < amount) {
-            let x = i * (this.strokeWidth + this.spacing);
+            let x = i * (this.strokeWidth + this.spacing) + this.strokeWidth;
             strands.push(new Strand(
                 this.strokeWidth,
                 [x, 0],
@@ -141,17 +140,47 @@ class Mesh {
 
     update() {
         if (this.queue.length < 1) {
+            this.idle();
             return;
         }
 
         this.processQueue();
     }
 
+    idle() {
+        if (Math.random() > 0.25) {
+            return;
+        }
+
+        const test = this.strands[0].control1[0];
+        let action;
+
+        action = [Math.random() * (settings.width * 2),
+                  Math.random() * (settings.height * 2)];
+
+        action = action.map(function(coord){
+            const positive = Math.random() > 0.5;
+            return positive === true ? coord : coord * -1;
+        });
+
+        this.updateQueue({control1: action});
+    }
+
     updateQueue(action) {
+        let final, increment;
         const attribute = Object.keys(action)[0],
-              final = action[attribute],
-              steps = 1000/60,
-              increment = Math.round(Math.abs(this.strokeWidth - final)/steps);
+              steps = 1000/60;
+
+        if (attribute === 'width') {
+            final = action[attribute];
+            increment = (final - this.strokeWidth)/steps;
+        } else {
+            final = action[attribute];
+            increment = [(final[0] - this.strands[0].control1[0])/steps,
+                         (final[1] - this.strands[0].control1[1])/steps];
+        }
+
+        this.queue = [];
 
         for (let i = 0; i < steps; i += 1) {
             const queueAction = {};
@@ -161,10 +190,21 @@ class Mesh {
     }
 
     processQueue() {
-        const action = this.queue.shift(),
-              spacing = this.spacing;
+        const action = this.queue.shift();
 
-        this.strokeWidth += action.width;
+        if (action.width) {
+            this.updateWidth(action.width);
+        } else {
+            this.updatePoint(action.control1);
+        }
+
+        this.updateMeshSize();
+    }
+
+    updateWidth(increment) {
+        const spacing = this.spacing;
+
+        this.strokeWidth += increment;
 
         const width = this.strokeWidth;
 
@@ -172,13 +212,51 @@ class Mesh {
             strand.width = width;
             strand.updateXCoordinates((i * (width + spacing)) + width/2);
         });
+    }
 
-        this.updateMeshSize();
+    updatePoint(point) {
+        this.strands.forEach(function(strand){
+            strand.control1[0] += point[0];
+            strand.control1[1] += point[1];
+
+            strand.control2[0] += -point[1];
+            strand.control2[1] += -point[0];
+        });
     }
 
     updateMeshSize() {
-        this.numberOfLines = Math.floor(settings.width * settings.pixelDensity/(this.strokeWidth + this.spacing));
-        this.strands = this.strands.slice(0, this.numberOfLines);
+        const meshSize = Math.floor((settings.width * settings.pixelDensity)/
+                                    (this.strokeWidth + this.spacing)),
+              difference = meshSize - this.numberOfLines;
+
+        if (difference === 0) {
+            return;
+        }
+
+        this.numberOfLines = meshSize;
+
+        if (difference < 0) {
+            this.strands = this.strands.slice(0, this.numberOfLines + 1);
+        } else {
+            let i = 0;
+            const length = this.strands.length;
+            while (i < difference) {
+                let x = (length + i) * (this.strokeWidth + this.spacing) + this.strokeWidth/2;
+
+                this.strands.push(new Strand(
+                    this.strokeWidth,
+                    [x, 0],
+                    [x, 0],
+                    [x, 0],
+                    [x, settings.height * settings.pixelDensity]
+                ));
+
+                i += 1;
+            }
+        }
+
+
+
     }
 
 }

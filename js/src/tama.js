@@ -11,7 +11,7 @@ class Tama {
         this.pubsub = pubsub;
         this.subscribe();
 
-        this.mesh = new Mesh();
+        this.mesh = new Mesh(1, 2);
     }
 
     subscribe() {
@@ -19,6 +19,8 @@ class Tama {
     }
 
     update() {
+        const currentTime = Date.now();
+
         this.age += 1;
 
         if (this._unhealthy > 5) {
@@ -26,15 +28,15 @@ class Tama {
             return;
         }
 
+        if (currentTime - this.lastFeed > 10500) {
+            // TODO
+        }
+
         this.mesh.update();
     }
 
     draw(context) {
         this.mesh.draw(context);
-    }
-
-    fillColor() {
-        return `rgb(${this.unhealthy * 10}, 50, 155)`;
     }
 
     feed() {
@@ -49,8 +51,7 @@ class Tama {
         this.lastFeed = currentTime;
         this.write('I am fed.');
 
-        this.mesh.updateQueue({width: 20});
-
+        this.mesh.updateQueue({width: this.mesh.strokeWidth + 3});
     }
 
     write(string) {
