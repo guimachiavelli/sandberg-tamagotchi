@@ -48,7 +48,12 @@ class Game {
         el.height = this.height;
 
         el.style.width = `${this.width/window.devicePixelRatio}px`;
-        el.style.width = `${this.height/window.devicePixelRatio}px`;
+        el.style.height = `${this.height/window.devicePixelRatio}px`;
+        el.style.position = 'absolute';
+        el.style.top = 0;
+        el.style.left = 0;
+        el.style.zIndex = 0;
+
 
         document.body.appendChild(el);
 

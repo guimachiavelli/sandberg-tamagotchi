@@ -25,6 +25,8 @@ class Interface {
     container() {
         const el = document.createElement('div');
         el.className = 'interface';
+        el.style.position = 'relative';
+        el.style.zIndex = 1;
 
         return el;
     }

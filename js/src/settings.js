@@ -1,6 +1,6 @@
 const settings = {
-    width: 500,
-    height: 500,
+    width: window.innerWidth,
+    height: window.innerHeight,
     pixelDensity: window.devicePixelRatio || 1
 };
 
