@@ -1,18 +1,5 @@
 import settings from './settings.js';
 
-const colours = [
-    'gold',
-    'skyblue',
-    'crimson',
-    'darkviolet',
-    'orange',
-    'pink',
-    'olive',
-    'purple',
-    'indigo',
-    'yellow'
-];
-
 class Strand {
     constructor(width, start, control1, control2, end) {
         this._width = width;
@@ -24,6 +11,7 @@ class Strand {
     }
 
     _colour() {
+        const colours = settings.colours;
         return colours[Math.floor(Math.random() * colours.length)];
     }
 
@@ -152,39 +140,76 @@ class Mesh {
             return;
         }
 
-        const test = this.strands[0].control1[0];
         let action;
 
-        action = [Math.random() * (settings.width * 2),
-                  Math.random() * (settings.height * 2)];
+        action = [Math.random() * (settings.width),
+                  Math.random() * (settings.height)];
 
         action = action.map(function(coord){
             const positive = Math.random() > 0.5;
-            return positive === true ? coord : coord * -1;
+            return positive === true ? 16 : -16;
         });
 
-        this.updateQueue({control1: action});
+        const colour = (function() {
+            const colours = settings.colours;
+            return colours[Math.floor(Math.random() * colours.length)];
+        }());
+
+        const attr = (function(){
+            if (Math.random() < 0.45) {
+                return 'control1';
+            } else if (Math.random() < 0.85) {
+                return 'control2';
+            } else if (Math.random() < 0.95) {
+                return 'end';
+            }
+
+            return 'start';
+        }());
+
+        this.updateQueue({
+            attribute: attr,
+            actions: action,
+            options: {
+                selector: [colour],
+                cancel: true
+            }
+        });
     }
 
     updateQueue(action) {
-        let final, increment;
-        const attribute = Object.keys(action)[0],
-              steps = 1000/60;
+        let endPoint, increment;
+        const steps = 1000/60;
 
-        if (attribute === 'width') {
-            final = action[attribute];
-            increment = (final - this.strokeWidth)/steps;
+        if (action.attribute === 'width') {
+            increment = (endPoint - this.strokeWidth)/steps;
         } else {
-            final = action[attribute];
-            increment = [(final[0] - this.strands[0].control1[0])/steps,
-                         (final[1] - this.strands[0].control1[1])/steps];
+            increment = this.strands.map(function(strand){
+                let x, y;
+
+                if (action.options.absolute === true) {
+                    x = (action.actions[0] - strand.control1[0])/steps;
+                    y = (action.actions[1] - strand.control1[1])/steps;
+                } else {
+                    x = action.actions[0]/steps;
+                    y = action.actions[1]/steps;
+                }
+
+                return [x, y];
+            });
         }
 
-        this.queue = [];
+        if (action.options.cancel === true) {
+            this.queue = [];
+        }
 
         for (let i = 0; i < steps; i += 1) {
-            const queueAction = {};
-            queueAction[attribute] = increment;
+            const queueAction = {
+                point: action.attribute,
+                increment: increment,
+                selector: action.options.selector
+            };
+
             this.queue.push(queueAction);
         }
     }
@@ -192,11 +217,7 @@ class Mesh {
     processQueue() {
         const action = this.queue.shift();
 
-        if (action.width) {
-            this.updateWidth(action.width);
-        } else {
-            this.updatePoint(action.control1);
-        }
+        this.updatePoint(action.point, action.increment, action.selector);
 
         this.updateMeshSize();
     }
@@ -214,14 +235,17 @@ class Mesh {
         });
     }
 
-    updatePoint(point) {
-        this.strands.forEach(function(strand){
-            strand.control1[0] += point[0];
-            strand.control1[1] += point[1];
+    updatePoint(point, increments, selector = []) {
+        increments.forEach(function(strandPoint, i) {
+            const strand = this.strands[i];
 
-            strand.control2[0] += -point[1];
-            strand.control2[1] += -point[0];
-        });
+            if (selector.indexOf(strand.colour) === -1) {
+                return;
+            }
+
+            strand[point][0] += strandPoint[0];
+            strand[point][1] += strandPoint[1];
+        }, this);
     }
 
     updateMeshSize() {

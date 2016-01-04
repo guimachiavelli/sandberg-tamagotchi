@@ -11,7 +11,7 @@ class Tama {
         this.pubsub = pubsub;
         this.subscribe();
 
-        this.mesh = new Mesh(1, 2);
+        this.mesh = new Mesh(1, 0);
     }
 
     subscribe() {
