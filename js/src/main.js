@@ -20,7 +20,7 @@ class Game {
         this.interface = new Interface(this.pubsub);
         this.textWindow = new TextWindow(this.pubsub);
 
-        this.song = new Song(this.tama);
+        this.song = new Song(this.tama, this.pubsub);
     }
 
     setup() {

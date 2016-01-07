@@ -11,7 +11,10 @@ class Interface {
     constructor(pubsub) {
         this.interface = this.container();
         this.feedButton = new Button('Feed', 'feed');
+        this.muteButton = new Button('Mute', 'mute');
+
         this.addButtonToContainer(this.feedButton);
+        this.addButtonToContainer(this.muteButton);
 
         this.pubsub = pubsub;
 

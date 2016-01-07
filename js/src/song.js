@@ -1,7 +1,10 @@
 import settings from './settings.js';
 
 class Song {
-    constructor(tama) {
+    constructor(tama, pubsub) {
+        this.muted = false;
+        this.defaultVolume = 0.1;
+
         this.context = new settings.AudioContext();
         this.strands = tama.mesh.strands;
         this.oscillators = this.oscillatorsFromStrands(tama.mesh.strands);
@@ -9,7 +12,10 @@ class Song {
         this.gainNode = this.context.createGain();
         this.gainNode.connect(this.context.destination);
 
-        this.gainNode.gain.value = 0.1;
+        this.gainNode.gain.value = this.defaultVolume;
+
+        this.pubsub = pubsub;
+        this.subscribe();
     }
 
     setup() {
@@ -17,6 +23,16 @@ class Song {
             oscillator.connect(this.gainNode);
             oscillator.start(0);
         }, this);
+    }
+
+    subscribe() {
+        this.pubsub.subscribe('action:mute', this.mute.bind(this));
+    }
+
+    mute() {
+        const volume = this.defaultVolume;
+        this.gainNode.gain.value = this.muted === false ? 0 : volume;
+        this.muted = this.muted === false;
     }
 
     oscillatorsFromStrands(strands) {
