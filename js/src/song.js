@@ -3,7 +3,8 @@ import settings from './settings.js';
 class Song {
     constructor(tama, pubsub) {
         this.muted = false;
-        this.defaultVolume = 0.1;
+        this.defaultVolume = 0.01;
+        //this.defaultVolume = 0;
 
         this.context = new settings.AudioContext();
         this.strands = tama.mesh.strands;
@@ -38,7 +39,7 @@ class Song {
     oscillatorsFromStrands(strands) {
         return strands.map(function(strand){
             const oscillator = this.context.createOscillator();
-            oscillator.type = Math.random() > 0.5 ? 'triangle' : 'sine';
+            oscillator.type = Math.random() > 0.5 ? 'sawtooth' : 'sine';
             oscillator.frequency.value = strand.control1[0];
             oscillator.detune.value = strand.control1[1];
             return oscillator;
@@ -51,6 +52,35 @@ class Song {
             oscillator.frequency.value = this.strands[i].frequency;
         }, this);
 
+    }
+
+    // might be useful to create a bit more ellaborate sounds
+    // snatched from tones.js (https://github.com/bit101/tones/)
+    play(freq) {
+        this.attack = this.attack || 1;
+        this.release = this.release || 1;
+        var envelope = this.context.createGain();
+        envelope.gain.setValueAtTime(this.volume, this.context.currentTime);
+        envelope.connect(this.context.destination);
+
+        envelope.gain.setValueAtTime(0, this.context.currentTime);
+        envelope.gain.setTargetAtTime(this.volume, this.context.currentTime, this.attack / 1000);
+        if(this.release) {
+            envelope.gain.setTargetAtTime(0, this.context.currentTime + this.attack / 1000, this.release / 1000);
+            setTimeout(function() {
+                osc.stop();
+                osc.disconnect(envelope);
+                envelope.gain.cancelScheduledValues(tones.context.currentTime);
+                envelope.disconnect(tones.context.destination);
+
+            }, this.attack * 10 + this.release * 10);
+        }
+
+        var osc = this.context.createOscillator();
+        osc.frequency.setValueAtTime(freq, this.context.currentTime);
+        osc.type = this.type;
+        osc.connect(envelope);
+        osc.start();
     }
 
 }
