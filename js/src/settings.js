@@ -13,7 +13,8 @@ const settings = {
         'purple',
         'indigo',
         'yellow'
-    ]
+    ],
+    AudioContext: window.AudioContext || window.webkitAudioContext
 
 };
 

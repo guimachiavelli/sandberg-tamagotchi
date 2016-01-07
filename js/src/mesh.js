@@ -27,6 +27,16 @@ class Strand {
         context.closePath();
     }
 
+    get frequency() {
+        return (this._control1[0] + this._control2[0]) * 100;
+    }
+
+    get detune() {
+        return (this._control1[1] + this._control2[1]) * 100;
+    }
+
+
+
     set width(value) {
         this._width = value;
     }

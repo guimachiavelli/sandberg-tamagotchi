@@ -2,6 +2,7 @@ import Interface from './interface.js';
 import Tama from './tama.js';
 import TextWindow from './textWindow.js';
 import PubSub from './pubsub.js';
+import Song from './song.js';
 import settings from './settings.js';
 
 class Game {
@@ -18,12 +19,15 @@ class Game {
         this.tama = new Tama(this.pubsub);
         this.interface = new Interface(this.pubsub);
         this.textWindow = new TextWindow(this.pubsub);
+
+        this.song = new Song(this.tama);
     }
 
     setup() {
         this.interface.render();
         this.textWindow.render(document.body);
         this.pubsub.subscribe('action:die', this.end.bind(this));
+        this.song.setup();
     }
 
     start() {
@@ -38,6 +42,7 @@ class Game {
         this.tama.update();
 
         this.draw();
+        this.song.update();
         window.requestAnimationFrame(this.update.bind(this));
     }
 
