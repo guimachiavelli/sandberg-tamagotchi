@@ -2,18 +2,18 @@ const settings = {
     width: window.innerWidth,
     height: window.innerHeight,
     pixelDensity: window.devicePixelRatio || 1,
-    colours: [
-        'gold',
-        'skyblue',
-        'crimson',
-        'darkviolet',
-        'orange',
-        'pink',
-        'olive',
-        'purple',
-        'indigo',
-        'yellow'
-    ],
+    colours: {
+        keter: 'gold',
+        chokhmah: 'skyblue',
+        binah: 'crimson',
+        chesed: 'darkviolet',
+        gevurah: 'orange',
+        tiferet: 'pink',
+        netzach: 'olive',
+        hod: 'purple',
+        yesod: 'indigo',
+        malkuth: 'yellow'
+    },
     AudioContext: window.AudioContext || window.webkitAudioContext
 
 };

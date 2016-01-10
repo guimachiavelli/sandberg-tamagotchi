@@ -11,7 +11,12 @@ class Strand {
     }
 
     _colour() {
-        const colours = settings.colours;
+        let colours = Object.keys(settings.colours);
+
+        colours = colours.map(function(colour){
+            return settings.colours[colour];
+        });
+
         return colours[Math.floor(Math.random() * colours.length)];
     }
 
@@ -28,14 +33,19 @@ class Strand {
     }
 
     get frequency() {
-        return (this._control1[0] + this._control2[0]) * 100;
+        const min = 250;
+        const max = 4500;
+        let frequency = this._control1[0] + this._control2[0];
+
+        frequency = Math.min(frequency, max);
+        frequency = Math.max(frequency, min);
+
+        return frequency;
     }
 
     get detune() {
-        return (this._control1[1] + this._control2[1]) * 100;
+        return (this._control1[1] + this._control2[1]) * 10;
     }
-
-
 
     set width(value) {
         this._width = value;
