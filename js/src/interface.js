@@ -10,10 +10,14 @@ class Button {
 class Interface {
     constructor(pubsub) {
         this.interface = this.container();
-        this.feedButton = new Button('Feed', 'feed');
+        this.playButton = new Button('Play with love', 'play-love');
+        this.travelButton = new Button('Travel in time', 'travel-time');
+        this.crazyButton = new Button('Go in a crazy spiritual frenzy', 'frenzy');
         this.muteButton = new Button('Mute', 'mute');
 
-        this.addButtonToContainer(this.feedButton);
+        this.addButtonToContainer(this.playButton);
+        this.addButtonToContainer(this.travelButton);
+        this.addButtonToContainer(this.crazyButton);
         this.addButtonToContainer(this.muteButton);
 
         this.pubsub = pubsub;

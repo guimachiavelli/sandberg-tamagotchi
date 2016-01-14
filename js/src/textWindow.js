@@ -2,6 +2,8 @@ class TextWindow {
     constructor(pubsub) {
         this._el = document.createElement('div');
         this._el.className = 'text-window';
+        this._el.style.position = 'relative';
+        this._el.style.zIndex = 10;
         this.pubsub = pubsub;
         this.subscribe();
     }

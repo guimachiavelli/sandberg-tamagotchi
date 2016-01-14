@@ -30,7 +30,9 @@ class Tama {
     }
 
     subscribe() {
-        this.pubsub.subscribe('action:feed', this.feed.bind(this));
+        this.pubsub.subscribe('action:play-love', this.play.bind(this));
+        this.pubsub.subscribe('action:travel-time', this.timetravel.bind(this));
+        this.pubsub.subscribe('action:frenzy', this.frenzy.bind(this));
     }
 
     randomSephirot() {
@@ -59,28 +61,69 @@ class Tama {
         this.mesh.draw(context);
     }
 
-    feed() {
-        const currentTime = Date.now();
+    play() {
+        //this.write('The LORD your God is in your midst, a mighty one who will save;');
 
-        if (currentTime - this.lastFeed < 500) {
-            this.unhealthy += 1;
-        }
+        this.sephirot.tiferet += 1;
+        this.sephirot.malkuth -= 1;
 
-        this.size += 1;
+        this.mesh.moveGroup({
+            attribute: 'control1',
+            actions: [150, -300],
+            options: {
+                selector: [settings.sephirot.tiferet.colour,
+                           settings.sephirot.malkuth.colour],
+                cancel: true
+            }
+        });
+    }
 
-        this.lastFeed = currentTime;
-        this.write('I am fed.');
+    frenzy() {
+        const sephira = this.randomSephirot(),
+              attribute = Math.random() > 0.5 ? 'control2' : 'control1',
+              x = Math.random() > 0.5 ? 500 : -500,
+              y = Math.random() > 0.5 ? 500 : -500;
 
-        this.mesh.updateQueue({attribute: 'size',
-                               actions: this.size });
+         this.mesh.moveGroup({
+            attribute: attribute,
+            actions: [x, y],
+            options: {
+                selector: [settings.sephirot[sephira].colour],
+                cancel: true
+            }
+        });
+    }
 
-        this.latestAction = currentTime;
+    timetravel() {
+        //this.write('You are in Da\'at');
+        this.sephirot.keter += 10;
+
+        this.mesh.moveGroup({
+            attribute: 'control2',
+            actions: [-250, 600],
+            options: {
+                selector: [settings.sephirot.tiferet.colour,
+                           settings.sephirot.malkuth.colour],
+                cancel: true
+            }
+        });
     }
 
     idle(sephirot) {
         const positive = Math.random() > 0.5,
               attr = Math.random() > 0.5 ? 'control1' : 'control2',
-              action = positive === true ? 16 : -16;
+              action = positive === true ? 16 : -16,
+              sephira = this.randomSephirot();
+
+        this.sephirot[sephira] += Math.random() > 0.5 ? 0.005 : -0.001;
+
+        if (this.sephirot[sephira] > 5) {
+            this.sephirot[sephira] = 0;
+        }
+
+        if (Math.random() > 0.85) {
+            this.sephirot[sephira] = 0;
+        }
 
         this.mesh.moveGroup({
             attribute: attr,
@@ -94,7 +137,6 @@ class Tama {
         this.latestAction = Date.now();
     }
 
-
     write(string) {
         if (!string) {
             return;
@@ -107,7 +149,6 @@ class Tama {
         this.write('I have died');
         this.pubsub.publish('action:die');
     }
-
 }
 
 export default Tama;

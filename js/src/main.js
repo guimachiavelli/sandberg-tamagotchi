@@ -27,7 +27,7 @@ class Game {
         this.interface.render();
         this.textWindow.render(document.body);
         this.pubsub.subscribe('action:die', this.end.bind(this));
-        this.song.setup();
+        //this.song.setup();
     }
 
     start() {
@@ -66,7 +66,7 @@ class Game {
     }
 
     draw() {
-        this.context.clearRect(0, 0, this.width, this.height);
+        //this.context.clearRect(0, 0, this.width, this.height);
         this.tama.draw(this.context);
     }
 
