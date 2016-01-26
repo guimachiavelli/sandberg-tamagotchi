@@ -52,6 +52,10 @@ class Mesh {
     }
 
     moveGroup(command) {
+        if (command.options.reverse === true) {
+            command.actions[0] = command.actions[0] * -1;
+            command.actions[1] = command.actions[1] * -1;
+        }
         this.updateQueue(command);
     }
 

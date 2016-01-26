@@ -10,15 +10,31 @@ class Button {
 class Interface {
     constructor(pubsub) {
         this.interface = this.container();
-        this.playButton = new Button('Play with love', 'play-love');
-        this.travelButton = new Button('Travel in time', 'travel-time');
-        this.crazyButton = new Button('Go in a crazy spiritual frenzy', 'frenzy');
-        this.muteButton = new Button('Mute', 'mute');
+        this.mercyButton = new Button('Be merciful', 'merciful');
+        this.sweetButton = new Button('Sweeten all severities', 'sweeten');
+        this.communeButton = new Button('Commune with the Unending', 'commune');
+        this.punishButton = new Button('Punish the wicked', 'punish');
+        this.kindnessButton = new Button('Be kind', 'kind');
+        this.balanceButton = new Button('Seek balance in creation', 'balance');
+        this.submissionButton = new Button('Submit to the obstacle', 'submission');
+        this.patienceButton = new Button('Be patient', 'patience');
+        this.penetrateButton = new Button('Penetrate the creation', 'penetrate');
+        this.filterButton = new Button('Filter the cosmos', 'filter');
+        this.addButtonToContainer(this.penetrateButton);
+        this.addButtonToContainer(this.mercyButton);
+        this.addButtonToContainer(this.sweetButton);
+        this.addButtonToContainer(this.communeButton);
+        this.addButtonToContainer(this.punishButton);
+        this.addButtonToContainer(this.kindnessButton);
+        this.addButtonToContainer(this.submissionButton);
+        this.addButtonToContainer(this.patienceButton);
+        this.addButtonToContainer(this.filterButton);
+        this.addButtonToContainer(this.balanceButton);
 
-        this.addButtonToContainer(this.playButton);
-        this.addButtonToContainer(this.travelButton);
-        this.addButtonToContainer(this.crazyButton);
+        this.muteButton = new Button('Mute', 'mute');
+        this.playButton = new Button('Play', 'play');
         this.addButtonToContainer(this.muteButton);
+        this.addButtonToContainer(this.playButton);
 
         this.pubsub = pubsub;
 

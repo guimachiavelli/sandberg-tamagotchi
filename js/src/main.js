@@ -59,7 +59,6 @@ class Game {
         el.style.left = 0;
         el.style.zIndex = 0;
 
-
         document.body.appendChild(el);
 
         return el;
