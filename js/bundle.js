@@ -1,7 +1,7 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 Object.defineProperty(exports, "__esModule", {
     value: true
@@ -18,20 +18,36 @@ var Button = function Button(name, action) {
     this.el.dataset.action = action;
 };
 
-var Interface = (function () {
+var Interface = function () {
     function Interface(pubsub) {
         _classCallCheck(this, Interface);
 
         this.interface = this.container();
-        this.playButton = new Button('Play with love', 'play-love');
-        this.travelButton = new Button('Travel in time', 'travel-time');
-        this.crazyButton = new Button('Go in a crazy spiritual frenzy', 'frenzy');
-        this.muteButton = new Button('Mute', 'mute');
+        this.mercyButton = new Button('Be merciful', 'merciful');
+        this.sweetButton = new Button('Sweeten all severities', 'sweeten');
+        this.communeButton = new Button('Commune with the Unending', 'commune');
+        this.punishButton = new Button('Punish the wicked', 'punish');
+        this.kindnessButton = new Button('Be kind', 'kind');
+        this.balanceButton = new Button('Seek balance in creation', 'balance');
+        this.submissionButton = new Button('Submit to the obstacle', 'submission');
+        this.patienceButton = new Button('Be patient', 'patience');
+        this.penetrateButton = new Button('Penetrate the creation', 'penetrate');
+        this.filterButton = new Button('Filter the cosmos', 'filter');
+        this.addButtonToContainer(this.penetrateButton);
+        this.addButtonToContainer(this.mercyButton);
+        this.addButtonToContainer(this.sweetButton);
+        this.addButtonToContainer(this.communeButton);
+        this.addButtonToContainer(this.punishButton);
+        this.addButtonToContainer(this.kindnessButton);
+        this.addButtonToContainer(this.submissionButton);
+        this.addButtonToContainer(this.patienceButton);
+        this.addButtonToContainer(this.filterButton);
+        this.addButtonToContainer(this.balanceButton);
 
-        this.addButtonToContainer(this.playButton);
-        this.addButtonToContainer(this.travelButton);
-        this.addButtonToContainer(this.crazyButton);
+        this.muteButton = new Button('Mute', 'mute');
+        this.playButton = new Button('Play', 'play');
         this.addButtonToContainer(this.muteButton);
+        this.addButtonToContainer(this.playButton);
 
         this.pubsub = pubsub;
 
@@ -77,14 +93,14 @@ var Interface = (function () {
     }]);
 
     return Interface;
-})();
+}();
 
 exports.default = Interface;
 
 },{}],2:[function(require,module,exports){
 'use strict';
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _interface = require('./interface.js');
 
@@ -114,7 +130,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Game = (function () {
+var Game = function () {
     function Game() {
         var options = arguments.length <= 0 || arguments[0] === undefined ? { width: 500, height: 500 } : arguments[0];
 
@@ -200,7 +216,7 @@ var Game = (function () {
     }]);
 
     return Game;
-})();
+}();
 
 var game = new Game({
     width: _settings2.default.width,
@@ -214,7 +230,7 @@ game.start();
 },{"./interface.js":1,"./pubsub.js":4,"./settings.js":5,"./song.js":6,"./tama.js":8,"./textWindow.js":9}],3:[function(require,module,exports){
 'use strict';
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 Object.defineProperty(exports, "__esModule", {
     value: true
@@ -232,7 +248,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Mesh = (function () {
+var Mesh = function () {
     function Mesh() {
         var strokeWidth = arguments.length <= 0 || arguments[0] === undefined ? 1 : arguments[0];
         var strands = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
@@ -286,6 +302,10 @@ var Mesh = (function () {
     }, {
         key: 'moveGroup',
         value: function moveGroup(command) {
+            if (command.options.reverse === true) {
+                command.actions[0] = command.actions[0] * -1;
+                command.actions[1] = command.actions[1] * -1;
+            }
             this.updateQueue(command);
         }
     }, {
@@ -386,14 +406,14 @@ var Mesh = (function () {
     }]);
 
     return Mesh;
-})();
+}();
 
 exports.default = Mesh;
 
 },{"./settings.js":5,"./strand.js":7}],4:[function(require,module,exports){
 'use strict';
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 Object.defineProperty(exports, "__esModule", {
     value: true
@@ -401,7 +421,7 @@ Object.defineProperty(exports, "__esModule", {
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var PubSub = (function () {
+var PubSub = function () {
     function PubSub() {
         _classCallCheck(this, PubSub);
 
@@ -466,7 +486,7 @@ var PubSub = (function () {
     }]);
 
     return PubSub;
-})();
+}();
 
 exports.default = PubSub;
 
@@ -482,20 +502,22 @@ var settings = {
     pixelDensity: window.devicePixelRatio || 1,
     sephirot: {
         keter: {
-            waveform: 'triangle',
+            waveform: 'sine',
             colour: 'gold',
             frequency: 493.883,
             detune: 0,
             attack: 2000,
-            release: 10
+            release: 50,
+            interval: 2000
         },
         chokhmah: {
             waveform: 'sine',
             colour: 'skyblue',
-            frequency: 440,
+            frequency: 436,
             detune: 5,
             attack: 50,
-            release: 20
+            release: 20,
+            interval: 500
         },
         binah: {
             waveform: 'sine',
@@ -503,15 +525,17 @@ var settings = {
             frequency: 440,
             detune: 0,
             attack: 20,
-            release: 50
+            release: 50,
+            interval: 500
         },
         chesed: {
-            waveform: 'square',
+            waveform: 'triangle',
             colour: 'darkviolet',
             frequency: 391.995,
             detune: 0,
             attack: 1,
-            release: 25
+            release: 1,
+            interval: 5000
         },
         gevurah: {
             waveform: 'sine',
@@ -519,47 +543,53 @@ var settings = {
             frequency: 391.995,
             detune: 15,
             attack: 25,
-            release: 1
+            release: 1,
+            interval: 5000
         },
         tiferet: {
-            waveform: 'sawtooth',
+            waveform: 'sine',
             colour: 'pink',
             frequency: 349.228,
             detune: 0,
-            attack: 600,
-            release: 600
+            attack: 60,
+            release: 60,
+            interval: 5000
         },
         netzach: {
             waveform: 'sine',
             colour: 'olive',
             frequency: 329.628,
             detune: 0,
-            attack: 250,
-            release: 1
+            attack: 25,
+            release: 10,
+            interval: 5000
         },
         hod: {
-            waveform: 'square',
+            waveform: 'sine',
             colour: 'purple',
             frequency: 329.628,
             detune: 50,
-            attack: 800,
-            release: 1
+            attack: 70,
+            release: 1,
+            interval: 5000
         },
         yesod: {
-            waveform: 'sawtooth',
+            waveform: 'sine',
             colour: 'indigo',
             frequency: 293.665,
             detune: 0,
             attack: 1,
-            release: 8
+            release: 8,
+            interval: 1500
         },
         malkuth: {
             waveform: 'triangle',
             colour: 'yellow',
-            frequency: 261.626,
+            frequency: 110,
             detune: 0,
             attack: 10,
-            release: 2000
+            release: 2000,
+            interval: 1000
         }
     },
     colours: {
@@ -585,7 +615,7 @@ exports.default = settings;
 },{}],6:[function(require,module,exports){
 'use strict';
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 Object.defineProperty(exports, "__esModule", {
     value: true
@@ -599,48 +629,42 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Song = (function () {
+var Song = function () {
     function Song(tama, pubsub) {
         _classCallCheck(this, Song);
 
         this.muted = false;
-        this.defaultVolume = 0.01;
+        this.defaultVolume = 0.1;
+        this.lastUpdate = {};
+        this.lastIncrement = Date.now();
+        this.rhythm = 800;
         //this.defaultVolume = 0;
 
         this.context = new _settings2.default.AudioContext();
         this.tama = tama;
         this.strands = tama.mesh.strands;
-        //this.oscillators = this.oscillatorsFromStrands(tama.mesh.strands);
         this.oscillators = this.oscillatorsFromSephirot();
-
-        this.gainNode = this.context.createGain();
-        this.gainNode.connect(this.context.destination);
-
-        this.gainNode.gain.value = this.defaultVolume;
 
         this.pubsub = pubsub;
         this.subscribe();
     }
 
     _createClass(Song, [{
-        key: 'setup',
-        value: function setup() {
-            this.oscillators.forEach(function (oscillator) {
-                oscillator.osc.connect(this.gainNode);
-                oscillator.osc.start(0);
-            }, this);
-        }
-    }, {
         key: 'subscribe',
         value: function subscribe() {
             this.pubsub.subscribe('action:mute', this.mute.bind(this));
+            this.pubsub.subscribe('action:play', this.startPlay.bind(this));
         }
     }, {
         key: 'mute',
         value: function mute() {
-            var volume = this.defaultVolume;
-            this.gainNode.gain.value = this.muted === false ? 0 : volume;
-            this.muted = this.muted === false;
+            this.muted = true;
+        }
+    }, {
+        key: 'startPlay',
+        value: function startPlay() {
+            this.muted = false;
+            this.play(0, 1, 1, 'sine');
         }
     }, {
         key: 'oscillatorsFromSephirot',
@@ -652,6 +676,8 @@ var Song = (function () {
                     name: sephira
                 };
 
+                this.lastUpdate[sephira] = Date.now();
+
                 sephira = _settings2.default.sephirot[sephira];
 
                 oscillator.waveform = sephira.waveform;
@@ -659,65 +685,131 @@ var Song = (function () {
                 oscillator.detune = sephira.detune;
                 oscillator.attack = sephira.attack;
                 oscillator.release = sephira.release;
+                oscillator.interval = sephira.interval;
 
-                return oscillator;
-            }, this);
-        }
-    }, {
-        key: 'oscillatorsFromStrands',
-        value: function oscillatorsFromStrands(strands) {
-            return strands.map(function (strand) {
-                var oscillator = this.context.createOscillator();
-                oscillator.type = Math.random() > 0.5 ? 'sawtooth' : 'sine';
-                oscillator.frequency.value = strand.control1[0];
-                oscillator.detune.value = strand.control1[1];
                 return oscillator;
             }, this);
         }
     }, {
         key: 'update',
         value: function update() {
-            this.oscillators.forEach(function (oscillator, i) {
-                var sephira = oscillator.name,
-                    sephiraScore = this.tama.sephirot[sephira] + 1;
-                var increment = Math.random() > 0.5 ? sephiraScore * 1 : sephiraScore * -1;
-                //oscillator.detune.value = this.strands[i].detune;
-
-                oscillator.frequency += increment;
-
-                this.play(oscillator.frequency, oscillator.attack, oscillator.release, oscillator.waveform);
-            }, this);
-        }
-
-        // might be useful to create a bit more ellaborate sounds
-        // snatched from tones.js (https://github.com/bit101/tones/)
-
-    }, {
-        key: 'play',
-        value: function play(freq, attack, release, waveform) {
-            if (Math.random() < 0.94) {
+            if (this.muted === true) {
                 return;
             }
 
-            var osc = this.context.createOscillator();
-            var envelope = this.context.createGain();
+            var currentTime = Date.now(),
+                aspect = this.tama.topSephira();
 
-            envelope.gain.setValueAtTime(this.defaultVolume, this.context.currentTime);
-            envelope.connect(this.context.destination);
-            envelope.gain.setValueAtTime(0, this.context.currentTime);
-            envelope.gain.setTargetAtTime(this.defaultVolume, this.context.currentTime, attack / 1000);
-            if (release) {
-                envelope.gain.setTargetAtTime(0, this.context.currentTime + attack / 1000, release / 1000);
+            this.oscillators.forEach(this.updateOscillator.bind(this, currentTime, aspect));
+        }
+    }, {
+        key: 'updateOscillator',
+        value: function updateOscillator(currentTime, aspect, oscillator) {
+            var sephira = oscillator.name,
+                sephiraScore = this.tama.sephirot[sephira];
 
-                setTimeout((function () {
-                    osc.stop();
-                    osc.disconnect(envelope);
-                    envelope.gain.cancelScheduledValues(this.context.currentTime);
-                    envelope.disconnect(this.context.destination);
-                }).bind(this), attack * 10 + release * 10);
+            if (sephiraScore < 30) {
+                return;
             }
 
-            osc.frequency.setValueAtTime(freq, this.context.currentTime);
+            if (currentTime - this.lastUpdate[sephira] < oscillator.interval) {
+                return;
+            }
+
+            this.incrementAttribute(aspect, sephiraScore, oscillator);
+
+            this.play(oscillator.frequency, oscillator.attack, oscillator.release, oscillator.waveform, Math.random());
+
+            this.lastUpdate[sephira] = currentTime;
+        }
+    }, {
+        key: 'incrementAttribute',
+        value: function incrementAttribute(aspect, score, oscillator) {
+            var currentTime = Date.now();
+
+            if (currentTime - this.lastIncrement < 300) {
+                return;
+            }
+
+            this.lastIncrement = currentTime;
+
+            if (Math.random() > 0.85) {
+                oscillator.interval = _settings2.default.sephirot[oscillator.name].interval;
+                oscillator.attack = _settings2.default.sephirot[oscillator.name].attack;
+                oscillator.release = _settings2.default.sephirot[oscillator.name].release;
+                oscillator.frequency = _settings2.default.sephirot[oscillator.name].frequency;
+                return;
+            }
+
+            switch (aspect) {
+                case 'keter':
+                    oscillator.interval += score;
+                    oscillator.attack += score;
+                    oscillator.release += score;
+
+                    if (oscillator.interval > 5000) {
+                        oscillator.interval = 2000;
+                    }
+                    break;
+                case 'malkuth':
+                    oscillator.interval -= score;
+                    oscillator.attack -= score;
+                    oscillator.release -= score;
+
+                    if (oscillator.interval < 100) {
+                        oscillator.interval = 5000;
+                    }
+
+                    if (oscillator.attack < 10) {
+                        oscillator.attack = 600;
+                    }
+
+                    if (oscillator.release < 5) {
+                        oscillator.release = 100;
+                    }
+
+                    break;
+                case 'chokmah':
+                    oscillator.attack -= score;
+                    break;
+                case 'binah':
+                    oscillator.attack += score;
+                    break;
+                case 'gevurah':
+                    oscillator.frequency -= score / 20;
+                    break;
+                case 'chesed':
+                    oscillator.frequency += score / 20;
+                    break;
+
+            }
+        }
+    }, {
+        key: 'play',
+        value: function play(freq, attack, release, waveform, volume) {
+            var osc = this.context.createOscillator(),
+                envelope = this.context.createGain(),
+                contextTime = this.context.currentTime;
+
+            volume = volume || this.defaultVolume;
+
+            envelope.gain.setValueAtTime(volume, contextTime);
+            envelope.connect(this.context.destination);
+            envelope.gain.setValueAtTime(0, contextTime);
+            envelope.gain.setTargetAtTime(volume, contextTime, attack / 1000);
+
+            if (release > 0) {
+                envelope.gain.setTargetAtTime(0, contextTime + attack / 1000, release / 1000);
+
+                setTimeout(function () {
+                    osc.stop();
+                    osc.disconnect(envelope);
+                    envelope.gain.cancelScheduledValues(contextTime);
+                    envelope.disconnect(this.context.destination);
+                }.bind(this), attack * 10 + release * 10);
+            }
+
+            osc.frequency.setValueAtTime(freq, contextTime);
             osc.type = waveform;
             osc.connect(envelope);
             osc.start();
@@ -725,14 +817,14 @@ var Song = (function () {
     }]);
 
     return Song;
-})();
+}();
 
 exports.default = Song;
 
 },{"./settings.js":5}],7:[function(require,module,exports){
 'use strict';
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 Object.defineProperty(exports, "__esModule", {
     value: true
@@ -748,7 +840,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Strand = (function () {
+var Strand = function () {
     function Strand(width, start, control1, control2, end) {
         _classCallCheck(this, Strand);
 
@@ -865,14 +957,14 @@ var Strand = (function () {
     }]);
 
     return Strand;
-})();
+}();
 
 exports.default = Strand;
 
 },{"./settings.js":5}],8:[function(require,module,exports){
 'use strict';
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 Object.defineProperty(exports, "__esModule", {
     value: true
@@ -890,7 +982,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Tama = (function () {
+var Tama = function () {
     function Tama(pubsub) {
         _classCallCheck(this, Tama);
 
@@ -903,29 +995,63 @@ var Tama = (function () {
         this.pubsub = pubsub;
         this.subscribe();
 
-        this.mesh = new _mesh2.default(1, this.size);
         this.mesh = new _mesh2.default(1);
 
         this.sephirot = {
-            keter: 0,
-            chokhmah: 0,
-            binah: 0,
-            chesed: 0,
-            gevurah: 0,
-            tiferet: 0,
-            netzach: 0,
-            hod: 0,
-            yesod: 0,
-            malkuth: 0
+            keter: this.randomStartValue(),
+            chokhmah: this.randomStartValue(),
+            binah: this.randomStartValue(),
+            chesed: this.randomStartValue(),
+            gevurah: this.randomStartValue(),
+            tiferet: this.randomStartValue(),
+            netzach: this.randomStartValue(),
+            hod: this.randomStartValue(),
+            yesod: this.randomStartValue(),
+            malkuth: this.randomStartValue()
         };
     }
 
     _createClass(Tama, [{
+        key: 'randomStartValue',
+        value: function randomStartValue() {
+            return Math.floor(Math.random() * 50) + 10;
+        }
+    }, {
+        key: 'topSephira',
+        value: function topSephira() {
+            var top = {
+                name: null,
+                value: 0
+            };
+
+            for (var sephira in this.sephirot) {
+                if (this.sephirot.hasOwnProperty(sephira) !== true) {
+                    continue;
+                }
+
+                if (this.sephirot[sephira] <= top.value) {
+                    continue;
+                }
+
+                top.name = sephira;
+                top.value = this.sephirot[sephira];
+            }
+
+            return top.name;
+        }
+    }, {
         key: 'subscribe',
         value: function subscribe() {
-            this.pubsub.subscribe('action:play-love', this.play.bind(this));
-            this.pubsub.subscribe('action:travel-time', this.timetravel.bind(this));
-            this.pubsub.subscribe('action:frenzy', this.frenzy.bind(this));
+            this.pubsub.subscribe('action:penetrate', this.penetrate.bind(this));
+            this.pubsub.subscribe('action:merciful', this.merciful.bind(this));
+            this.pubsub.subscribe('action:sweeten', this.sweeten.bind(this));
+            this.pubsub.subscribe('action:commune', this.commune.bind(this));
+            this.pubsub.subscribe('action:punish', this.punish.bind(this));
+            this.pubsub.subscribe('action:kind', this.kind.bind(this));
+            this.pubsub.subscribe('action:balance', this.balance.bind(this));
+            this.pubsub.subscribe('action:submission', this.submission.bind(this));
+            this.pubsub.subscribe('action:patience', this.patience.bind(this));
+            this.pubsub.subscribe('action:filter', this.filter.bind(this));
         }
     }, {
         key: 'randomSephirot',
@@ -957,78 +1083,294 @@ var Tama = (function () {
             this.mesh.draw(context);
         }
     }, {
-        key: 'play',
-        value: function play() {
-            //this.write('The LORD your God is in your midst, a mighty one who will save;');
+        key: 'merciful',
+        value: function merciful() {
+            //keter
+            var revert = Math.random() > 0.5;
 
-            this.sephirot.tiferet += 1;
-            this.sephirot.malkuth -= 1;
+            this.sephirot.keter += 10;
+            this.sephirot.malkuth -= 5;
 
             this.mesh.moveGroup({
                 attribute: 'control1',
-                actions: [150, -300],
+                actions: [-200, 160],
                 options: {
-                    selector: [_settings2.default.sephirot.tiferet.colour, _settings2.default.sephirot.malkuth.colour],
-                    cancel: true
+                    cancel: true,
+                    selector: [_settings2.default.sephirot.keter.colour]
                 }
             });
-        }
-    }, {
-        key: 'frenzy',
-        value: function frenzy() {
-            var sephira = this.randomSephirot(),
-                attribute = Math.random() > 0.5 ? 'control2' : 'control1',
-                x = Math.random() > 0.5 ? 500 : -500,
-                y = Math.random() > 0.5 ? 500 : -500;
-
-            this.mesh.moveGroup({
-                attribute: attribute,
-                actions: [x, y],
-                options: {
-                    selector: [_settings2.default.sephirot[sephira].colour],
-                    cancel: true
-                }
-            });
-        }
-    }, {
-        key: 'timetravel',
-        value: function timetravel() {
-            //this.write('You are in Da\'at');
-            this.sephirot.keter += 10;
 
             this.mesh.moveGroup({
                 attribute: 'control2',
-                actions: [-250, 600],
+                actions: [50, -300],
                 options: {
-                    selector: [_settings2.default.sephirot.tiferet.colour, _settings2.default.sephirot.malkuth.colour],
+                    selector: [_settings2.default.sephirot.keter.colour],
+                    reverse: revert
+                }
+            });
+
+            this.latestAction = Date.now();
+        }
+    }, {
+        key: 'sweeten',
+        value: function sweeten() {
+            //Binah
+            var revert = Math.random() > 0.5;
+
+            this.sephirot.binah += 10;
+            this.sephirot.chokhmah -= 10;
+
+            this.mesh.moveGroup({
+                attribute: 'control2',
+                actions: [500, 160],
+                options: {
+                    selector: [_settings2.default.sephirot.binah.colour],
+                    reverse: revert
+                }
+            });
+
+            this.mesh.moveGroup({
+                attribute: 'end',
+                actions: [-500, -60],
+                options: {
+                    selector: [_settings2.default.sephirot.binah.colour],
+                    reverse: revert
+                }
+            });
+
+            this.latestAction = Date.now();
+        }
+    }, {
+        key: 'commune',
+        value: function commune() {
+            //Chokmah
+            var revert = Math.random() > 0.5;
+
+            this.sephirot.chokhmah += 10;
+            this.sephirot.binah -= 10;
+
+            this.mesh.moveGroup({
+                attribute: 'control2',
+                actions: [200, 160],
+                options: {
+                    selector: [_settings2.default.sephirot.chokhmah.colour],
+                    reverse: revert
+                }
+            });
+
+            this.mesh.moveGroup({
+                attribute: 'control2',
+                actions: [200, -1600],
+                options: {
+                    selector: [_settings2.default.sephirot.chokhmah.colour],
+                    reverse: revert
+                }
+            });
+
+            this.latestAction = Date.now();
+        }
+    }, {
+        key: 'punish',
+        value: function punish() {
+            var revert = Math.random() > 0.5;
+
+            this.sephirot.gevurah += 10;
+            this.sephirot.chesed -= 10;
+
+            this.mesh.moveGroup({
+                attribute: 'control2',
+                actions: [200, 160],
+                options: {
+                    selector: [_settings2.default.sephirot.gevurah.colour],
+                    reverse: revert
+                }
+            });
+
+            this.mesh.moveGroup({
+                attribute: 'start',
+                actions: [600, 1.6],
+                options: {
+                    selector: [_settings2.default.sephirot.gevurah.colour],
+                    reverse: revert
+                }
+            });
+
+            this.latestAction = Date.now();
+        }
+    }, {
+        key: 'kind',
+        value: function kind() {
+            var revert = Math.random() > 0.5;
+
+            this.sephirot.chesed += 10;
+            this.sephirot.gevurah -= 10;
+
+            this.mesh.moveGroup({
+                attribute: 'control2',
+                actions: [200, 160],
+                options: {
+                    selector: [_settings2.default.sephirot.chesed.colour],
+                    reverse: revert
+                }
+            });
+
+            this.mesh.moveGroup({
+                attribute: 'control1',
+                actions: [-200, 260],
+                options: {
+                    selector: [_settings2.default.sephirot.chesed.colour],
+                    reverse: revert
+                }
+            });
+
+            this.latestAction = Date.now();
+        }
+    }, {
+        key: 'balance',
+        value: function balance() {
+            var revert = Math.random() > 0.5;
+
+            this.sephirot.tiferet += 10;
+            this.sephirot.gevurah -= 5;
+            this.sephirot.chesed -= 5;
+            this.sephirot.hod -= 5;
+            this.sephirot.netzach -= 5;
+
+            this.mesh.moveGroup({
+                attribute: 'control1',
+                actions: [10, 160],
+                options: {
+                    selector: [_settings2.default.sephirot.tiferet.colour],
+                    reverse: revert
+                }
+            });
+
+            this.mesh.moveGroup({
+                attribute: 'control1',
+                actions: [10, 160],
+                options: {
+                    selector: [_settings2.default.sephirot.tiferet.colour]
+                }
+            });
+
+            this.mesh.moveGroup({
+                attribute: 'control2',
+                actions: [16, 16],
+                options: {
+                    selector: [_settings2.default.sephirot.tiferet.colour]
+                }
+            });
+
+            this.latestAction = Date.now();
+        }
+    }, {
+        key: 'submission',
+        value: function submission() {
+            var revert = Math.random() > 0.5;
+
+            this.sephirot.hod += 10;
+            this.sephirot.netzach -= 10;
+
+            this.mesh.moveGroup({
+                attribute: 'end',
+                actions: [10, 160],
+                options: {
+                    selector: [_settings2.default.sephirot.hod.colour],
+                    reverse: revert
+                }
+            });
+
+            this.mesh.moveGroup({
+                attribute: 'end',
+                actions: [Math.random() * 160, Math.random() * 260],
+                options: {
+                    selector: [_settings2.default.sephirot.hod.colour],
+                    reverse: revert
+                }
+            });
+
+            this.latestAction = Date.now();
+        }
+    }, {
+        key: 'patience',
+        value: function patience() {
+            var revert = Math.random() > 0.5;
+
+            this.sephirot.netzach += 10;
+            this.sephirot.hod -= 10;
+
+            this.mesh.moveGroup({
+                attribute: 'start',
+                actions: [410, 10],
+                options: {
+                    selector: [_settings2.default.sephirot.netzach.colour],
+                    reverse: revert
+                }
+            });
+
+            this.mesh.moveGroup({
+                attribute: 'control2',
+                actions: [100, -10],
+                options: {
+                    selector: [_settings2.default.sephirot.netzach.colour]
+                }
+            });
+
+            this.latestAction = Date.now();
+        }
+    }, {
+        key: 'penetrate',
+        value: function penetrate() {
+            var revert = Math.random() > 0.5;
+
+            this.sephirot.yesod += 10;
+            this.sephirot.hod -= 10;
+            this.sephirot.netzach -= 10;
+            this.sephirot.malkuth -= 10;
+
+            this.mesh.moveGroup({
+                attribute: 'control2',
+                actions: [150, 1300],
+                options: {
+                    selector: [_settings2.default.sephirot.yesod.colour],
+                    cancel: true,
+                    reverse: revert
+                }
+            });
+
+            this.latestAction = Date.now();
+        }
+    }, {
+        key: 'filter',
+        value: function filter() {
+            this.sephirot.malkuth += 10;
+
+            this.mesh.moveGroup({
+                attribute: 'control2',
+                actions: [150, 300],
+                options: {
+                    selector: [_settings2.default.sephirot.malkuth.colour],
                     cancel: true
                 }
             });
+
+            this.latestAction = Date.now();
         }
     }, {
         key: 'idle',
         value: function idle(sephirot) {
             var positive = Math.random() > 0.5,
                 attr = Math.random() > 0.5 ? 'control1' : 'control2',
-                action = positive === true ? 16 : -16,
+                action = positive === true ? 32 : -32,
                 sephira = this.randomSephirot();
 
-            this.sephirot[sephira] += Math.random() > 0.5 ? 0.005 : -0.001;
-
-            if (this.sephirot[sephira] > 5) {
-                this.sephirot[sephira] = 0;
-            }
-
-            if (Math.random() > 0.85) {
-                this.sephirot[sephira] = 0;
-            }
+            this.sephirot[sephira] += Math.random() > 0.5 ? 10 : -10;
 
             this.mesh.moveGroup({
                 attribute: attr,
                 actions: [action, action],
                 options: {
-                    selector: [_settings2.default.colours[sephirot]],
-                    cancel: true
+                    selector: [_settings2.default.colours[sephirot]]
                 }
             });
 
@@ -1052,14 +1394,14 @@ var Tama = (function () {
     }]);
 
     return Tama;
-})();
+}();
 
 exports.default = Tama;
 
 },{"./mesh.js":3,"./settings.js":5}],9:[function(require,module,exports){
 'use strict';
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 Object.defineProperty(exports, "__esModule", {
     value: true
@@ -1067,7 +1409,7 @@ Object.defineProperty(exports, "__esModule", {
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var TextWindow = (function () {
+var TextWindow = function () {
     function TextWindow(pubsub) {
         _classCallCheck(this, TextWindow);
 
@@ -1100,7 +1442,7 @@ var TextWindow = (function () {
     }]);
 
     return TextWindow;
-})();
+}();
 
 exports.default = TextWindow;
 
